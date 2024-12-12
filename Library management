@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: Student Course Management API
+  version: 1.0.0
+paths:
+  /groups:
+    get:
+      summary: Retrieve a list of groups
+      parameters:
+        - name: groupName
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: groupYear
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: A list of groups
+    post:
+      summary: Create a new group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groupName:
+                  type: string
+                groupYear:
+                  type: string
+                promotion:
+                  type: string
+                  enum: [G, H, J, K]
+                studentNb:
+                  type: integer
+                students:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '201':
+          description: Group created
+    put:
+      summary: Update an existing group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groupName:
+                  type: string
+                groupYear:
+                  type: string
+                promotion:
+                  type: string
+                  enum: [G, H, J, K]
+                studentNb:
+                  type: integer
+                students:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '204':
+          description: Group updated
+    delete:
+      summary: Delete a group
+      responses:
+        '204':
+          description: Group deleted
+
+  /students:
+    get:
+      summary: Retrieve a list of students
+      parameters:
+        - name: studentName
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of students
+    post:
+      summary: Create a new student
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                sex:
+                  type: string
+                  enum: [M, F]
+                birthdate:
+                  type: string
+                  format: date
+                reference:
+                  type: string
+                group:
+                  type: string
+      responses:
+        '201':
+          description: Student created
+    put:
+      summary: Update an existing student
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                sex:
+                  type: string
+                  enum: [M, F]
+                birthdate:
+                  type: string
+                  format: date
+                reference:
+                  type: string
+                group:
+                  type: string
+      responses:
+        '204':
+          description: Student updated
+    delete:
+      summary: Delete a student
+      responses:
+        '204':
+          description: Student deleted
